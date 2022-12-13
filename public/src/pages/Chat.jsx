@@ -1,22 +1,61 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { allUsersRoute } from "../utils/ApiRoutes";
+import { Contacts } from "../components/Contacts";
+import Welcome from "../components/Welcome";
+import ChatContainer from "../components/ChatContainer";
 function Chat() {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [contacts, setContacts] = useState([]);
+  const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoaded, setLoaded] = useState(false);
   useEffect(() => {
-    const user = localStorage.getItem("chat-app-user");
-    const userJson = JSON.parse(user);
-    if (!user) {
-      navigate("/login");
+    async function runs() {
+      if (!localStorage.getItem("chat-app-user")) {
+        navigate("/login");
+      } else {
+        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setLoaded(true);
+      }
     }
-
-    if (!userJson.isAvatarImageSet) {
-      navigate("/setAvatar");
-    }
+    runs();
   }, []);
+
+  useEffect(() => {
+    async function runs2() {
+      if (currentUser) {
+        if (currentUser.isAvatarImageSet) {
+          const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+          setContacts(data.data);
+        } else {
+          navigate("/setAvatar");
+        }
+      }
+    }
+    runs2();
+  }, [currentUser]);
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
+
   return (
     <Container>
-      <div className="container"></div>
+      <div className="container">
+        <Contacts
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
+        {isLoaded && currentChat === undefined ? (
+          <Welcome currentUser={currentUser} />
+        ) : (
+          <ChatContainer currentChat={currentChat} />
+        )}
+      </div>
     </Container>
   );
 }

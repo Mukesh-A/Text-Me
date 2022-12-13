@@ -29,18 +29,18 @@ export default function SetAvatar() {
   }, []);
 
   const setProfilePicture = async () => {
-    console.log("1");
+    
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
-      console.log("2");
+      
 
       const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-
+   
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
-      console.log(data);
+
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
