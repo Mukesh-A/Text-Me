@@ -1,7 +1,19 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
+import ChatInput from "../pages/ChatInput";
+import { addMessage } from "../utils/ApiRoutes";
 import Logout from "./Logout";
-export default function ChatContainer({ currentChat }) {
+import Messages from "./Messages";
+export default function ChatContainer({ currentChat, currentUser }) {
+  const handleSendMsg = async (msg) => {
+    const { data } = await axios.post(addMessage, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
+    console.log(data);
+  };
   return (
     <Container>
       <div className="chat-header">
@@ -18,8 +30,8 @@ export default function ChatContainer({ currentChat }) {
         </div>
         <Logout />
       </div>
-      <div className="chat-messages"></div>
-      <div className="chat-input"></div>
+      <Messages />
+      <ChatInput handleSendMsg={handleSendMsg} />
     </Container>
   );
 }
