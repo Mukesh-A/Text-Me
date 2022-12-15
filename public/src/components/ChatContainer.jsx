@@ -69,7 +69,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
 const Container = styled.div`
   padding-top: 1rem;
   display: grid;
-  grid-template-rows: 10% 78% 12%;
+  grid-template-rows: 10% 80% 10%;
   gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -99,9 +99,9 @@ const Container = styled.div`
   .chat-messages {
     padding: 1rem 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 1rem;
-    overflow: scroll;  
+    overflow: auto;
     /* flex-direction: column-reverse; */
     &::-webkit-scrollbar {
       width: 0.2rem;

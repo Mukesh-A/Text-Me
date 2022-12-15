@@ -48,23 +48,26 @@ export default function ChatInput({ handleSendMsg }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 5% 95%;
+  grid-template-columns: 6% 94%;
   align-items: center;
   /* background-color: #080420; */
-  padding: 0 2rem;
+  padding: 0 1rem;
   padding-bottom: 0.3rem;
   .button-container {
     display: flex;
     align-items: center;
     color: white;
     gap: 1rem;
+    /* border: 1px solid red; */
     .emoji {
       position: relative;
-      /* padding-right: 9rem; */
+      /* height:100%; */
+      /* right: 0; */
       svg {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        /* font-size: 1.5rem; */
         /* ffff00c8 */
-        color: #06cff1;
+        color: #ffff00c8;
         cursor: pointer;
       }
       .emoji-picker-react {
