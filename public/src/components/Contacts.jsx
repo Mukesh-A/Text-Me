@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 export const Contacts = ({ contacts, currentUser, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
@@ -24,7 +24,7 @@ export const Contacts = ({ contacts, currentUser, changeChat }) => {
         <Container>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h3>Text Me</h3>
+            {/* <h3>Text Me</h3> */}
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
@@ -36,7 +36,11 @@ export const Contacts = ({ contacts, currentUser, changeChat }) => {
                   key={index}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div className={`avatar`}>
+                  <div
+                    className={`avatar ${
+                      index === currentSelected ? "circle" : ""
+                    }`}
+                  >
                     <img
                       key={contact}
                       src={`data:image/svg+xml;base64,${contact.avatarImage}`}
@@ -71,14 +75,16 @@ const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   /* border: 1px solid red; */
   overflow: hidden;
-  background-color: #080420;
+  background-color: #d798f7;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   .brand {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     img {
-      height: 2rem;
+      height: 3rem;
     }
     h3 {
       color: white;
@@ -112,35 +118,46 @@ const Container = styled.div`
       gap: 1rem;
       transition: 0.5s ease-in-out;
       .avatar {
+        transition: 0.5s ease-in-out;
         img {
-          height: 3rem;
+          height: 2.5rem;
         }
+      }
+      .circle {
+        height: 3rem;
+        padding:2px;
+        border-radius: 50%;
+        border: 2px solid #821db5;
       }
       .username {
         h3 {
-          color: white;
+          color: #821db5;
         }
       }
     }
     .selected {
-      background-color: #9186f3;
+     
+
+      background-color: #c580e7;
     }
   }
   .current-user {
-    background-color: #0d0d30;
+    background-color: #ffffff39;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    justify-content: stretch;
+    /* gap: 1rem; */
     .avatar {
+      padding:1rem;
       img {
         height: 4rem;
         max-inline-size: 100%;
       }
     }
+
     .username {
       h2 {
-        color: white;
+        color: #821db5;
       }
     }
     @media screen and(min-width:720px) and (max-width: 1080px) {

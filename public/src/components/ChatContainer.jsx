@@ -1,33 +1,61 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ChatInput from "../pages/ChatInput";
 import { addMessage, getAllMessage } from "../utils/ApiRoutes";
 import Logout from "./Logout";
 import Messages from "./Messages";
-export default function ChatContainer({ currentChat, currentUser }) {
+import { v4 as uuidv4 } from "uuid";
+export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
-
+  const scrollRef = useRef();
+  const [arrivalMessage, setArivalMessage] = useState(null);
   useEffect(() => {
     async function run() {
-      const response = await axios.post(getAllMessage, {
-        from: currentUser?._id,
-        to: currentChat?._id,
-      });
-      // console.log(response);
-      setMessages(response.data);
+      if (currentChat) {
+        const response = await axios.post(getAllMessage, {
+          from: currentUser?._id,
+          to: currentChat?._id,
+        });
+        // console.log(response);
+        setMessages(response.data);
+      }
     }
     run();
-  }, [currentChat, messages]);
+  }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
+    socket.current.emit("send-msg", {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
     const { data } = await axios.post(addMessage, {
       from: currentUser._id,
       to: currentChat._id,
       message: msg,
     });
-    console.log(data);
+    // console.log(data);
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    setMessages(msgs);
   };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-receive", (msg) => {
+        setArivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <Container>
       <div className="chat-header">
@@ -48,7 +76,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
         {messages.map((message, index) => {
           // console.log(message);
           return (
-            <div className="">
+            <div ref={scrollRef} key={uuidv4()}>
               <div
                 className={`message ${
                   message.fromSelf ? "sender" : "received"
@@ -79,19 +107,29 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding:0 2rem;
+    /* margin-bottom: 1rem; */
+    border-bottom: 2px solid #4f04ff21;
     .user-details {
       display: flex;
       align-items: center;
       gap: 1rem;
       .avatar {
+        height: 3.5rem;
+        padding: 2px;
+        border-radius: 50%;
+        border: 2px solid #821db5;
+        /* padding-bottom:2rem; */
         img {
           height: 3rem;
         }
       }
+      /* .circle {
+        height: 3rem;
+      } */
       .username {
         h3 {
-          color: white;
+          color: black;
         }
       }
     }
@@ -99,10 +137,9 @@ const Container = styled.div`
   .chat-messages {
     padding: 1rem 2rem;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 1rem;
     overflow: auto;
-    /* flex-direction: column-reverse; */
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
@@ -120,7 +157,7 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: black;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }

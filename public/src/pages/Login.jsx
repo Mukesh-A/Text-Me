@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -69,7 +69,7 @@ export default function Login() {
         <form onSubmit={(event) => handelSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h1>TextMe</h1>
+            {/* <h1>TextMe</h1> */}
           </div>
 
           <input
@@ -103,18 +103,15 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #d2c4d9;
+
   .brand {
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: center;
     img {
-      height: 5rem;
-    }
-    h1 {
-      color: white;
-      text-transform: uppercase;
+      height: 4rem;
     }
   }
   form {
@@ -122,24 +119,26 @@ const FormContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    background-color: #00000076;
+    background-color: #d798f7;
     border-radius: 2rem;
     padding: 3rem 5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 40px 0px;
     input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #4e0eff;
+      border: 0.1rem solid #821db5;
       border-radius: 0.4rem;
-      color: white;
+      color: black;
       width: 100%;
-      font-size: 1rem;
+      font-size: 1.2rem;
       &:focus {
+        background-color: transparent;
         border: 0.1rem solid #997af0;
         outline: none;
       }
     }
     button {
-      background-color: #4e0eff;
+      background-color: #821db5;
       color: white;
       padding: 1rem 2rem;
       border: none;
@@ -151,13 +150,13 @@ const FormContainer = styled.div`
       transition: 0.5s ease-in-out;
       &:hover {
         transform: scale(0.98);
-        background-color: #5015f1;
+        background-color: #997af0;
       }
     }
     span {
-      color: white;
+      color: black;
       a {
-        color: #4e0eff;
+        color: #821db5;
         text-decoration: none;
       }
     }

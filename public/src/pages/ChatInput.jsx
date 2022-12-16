@@ -67,7 +67,7 @@ const Container = styled.div`
         font-size: 1.6rem;
         /* font-size: 1.5rem; */
         /* ffff00c8 */
-        color: #ffff00c8;
+        color: #821db5;
         cursor: pointer;
       }
       .emoji-picker-react {
@@ -106,7 +106,7 @@ const Container = styled.div`
     gap: 2rem;
     background-color: #ffffff34;
     input {
-      color: white;
+      color: black;
       width: 90%;
       /* height: 60%; */
       background-color: transparent;
@@ -129,9 +129,10 @@ const Container = styled.div`
       justify-items: center;
       border: none;
       align-items: center;
+      cursor:pointer;
       svg {
         font-size: 1.7rem;
-        color: white;
+        color: black;
       }
     }
   }

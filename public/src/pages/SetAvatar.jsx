@@ -29,14 +29,11 @@ export default function SetAvatar() {
   }, []);
 
   const setProfilePicture = async () => {
-    
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
-      
-
       const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-   
+
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
@@ -113,7 +110,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 3rem;
-  background-color: #131324;
+  background-color: #d2c4d9;
   height: 100vh;
   width: 100vw;
 
@@ -123,7 +120,7 @@ const Container = styled.div`
 
   .title-container {
     h1 {
-      color: white;
+      color: black;
     }
   }
   .avatars {
@@ -144,11 +141,11 @@ const Container = styled.div`
       }
     }
     .selected {
-      border: 0.4rem solid #4e0eff;
+      border: 0.4rem solid #821db5;
     }
   }
   .submit-btn {
-    background-color: #4e0eff;
+    background-color: #821db5;
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -157,8 +154,10 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: 1rem;
     text-transform: uppercase;
+    transition: 0.5s ease-in-out;
+
     &:hover {
-      background-color: #4e0eff;
+      background-color: #997af0;
     }
   }
 `;
