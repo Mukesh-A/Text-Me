@@ -138,10 +138,17 @@ const Container = styled.div`
       img {
         height: 6rem;
         transition: 0.5s ease-in-out;
+        @media (max-width: 480px) {
+          height: 4rem;
+        }
       }
     }
     .selected {
       border: 0.4rem solid #821db5;
+    }
+    @media (max-width: 480px) {
+     
+      gap: .4rem;
     }
   }
   .submit-btn {
@@ -159,5 +166,9 @@ const Container = styled.div`
     &:hover {
       background-color: #997af0;
     }
+  }
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+    
   }
 `;

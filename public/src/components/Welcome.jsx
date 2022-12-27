@@ -26,4 +26,10 @@ const Container = styled.div`
   span {
     color: #4e00ff;
   }
+  @media (max-width: 480px) {
+    /* flex-direction: column; */
+    margin-left: 5rem;
+
+    font-size: 0.6rem;
+  }
 `;

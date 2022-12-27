@@ -14,6 +14,7 @@ function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoaded, setLoaded] = useState(false);
+  // const [con, setCon] = useState(false);
   useEffect(() => {
     async function runs() {
       if (!localStorage.getItem("chat-app-user")) {
@@ -55,14 +56,17 @@ function Chat() {
     <Container>
       <div className="container">
         <Contacts
+          className="con"
           contacts={contacts}
+          // con={con}
           currentUser={currentUser}
           changeChat={handleChatChange}
         />
         {isLoaded && currentChat === undefined ? (
-          <Welcome currentUser={currentUser} />
+          <Welcome className="Welcome" currentUser={currentUser} />
         ) : (
           <ChatContainer
+            className="ChatContainer"
             currentChat={currentChat}
             currentUser={currentUser}
             socket={socket}
@@ -86,7 +90,7 @@ const Container = styled.div`
   .container {
     height: 85vh;
     width: 85vw;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     background-color: #bfa8ca;
     display: grid;
     grid-template-columns: 25% 75%;
@@ -96,8 +100,12 @@ const Container = styled.div`
     @media screen and(min-width:720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;
     }
-    @media screen and(min-width:360px) and (max-width: 480px) {
+    /* @media screen and(min-width:360px) and (max-width: 480px) {
       grid-template-columns: 25% 75%;
+    } */
+    @media (max-width: 480px) {
+      grid-template-columns: 20% 78%;
+      font-size: 1rem;
     }
   }
 `;

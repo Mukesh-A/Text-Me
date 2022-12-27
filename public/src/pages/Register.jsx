@@ -178,5 +178,9 @@ const FormContainer = styled.div`
         text-decoration: none;
       }
     }
+    @media (max-width: 480px) {
+      width: 90%;
+      padding: 3rem 3rem;
+    }
   }
 `;

@@ -123,6 +123,7 @@ const FormContainer = styled.div`
     border-radius: 2rem;
     padding: 3rem 5rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 40px 0px;
+
     input {
       background-color: transparent;
       padding: 1rem;
@@ -159,6 +160,10 @@ const FormContainer = styled.div`
         color: #821db5;
         text-decoration: none;
       }
+    }
+    @media (max-width: 480px) {
+      width: 90%;
+      padding: 3rem 3rem;
     }
   }
 `;

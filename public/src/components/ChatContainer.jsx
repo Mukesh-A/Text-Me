@@ -107,7 +107,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0 2rem;
+    padding: 0 2rem;
     /* margin-bottom: 1rem; */
     border-bottom: 2px solid #4f04ff21;
     .user-details {
@@ -132,6 +132,15 @@ const Container = styled.div`
           color: black;
         }
       }
+    }
+    @media (max-width: 480px) {
+      /* flex-direction: column; */
+      padding: 0;
+      /* justify-content: center; */
+      /* width: 50%; */
+
+      gap: 1rem;
+      /* font-size: 0.5rem; */
     }
   }
   .chat-messages {
@@ -158,6 +167,10 @@ const Container = styled.div`
         font-size: 1.1rem;
         border-radius: 1rem;
         color: black;
+        @media (max-width: 480px) {
+          max-width: 90%;
+          font-size: 0.8rem;
+        }
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
@@ -174,6 +187,10 @@ const Container = styled.div`
       .content {
         background-color: #9900ff20;
       }
+    }
+    @media (max-width: 480px) {
+      padding: 0;
+
     }
   }
 `;

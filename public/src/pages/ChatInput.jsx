@@ -35,7 +35,7 @@ export default function ChatInput({ handleSendMsg }) {
       <form className="input-container" onSubmit={(e) => sendChat(e)}>
         <input
           type="text"
-          placeholder="Type your message here"
+          placeholder="Type your message "
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
         />
@@ -53,6 +53,10 @@ const Container = styled.div`
   /* background-color: #080420; */
   padding: 0 1rem;
   padding-bottom: 0.3rem;
+  @media (max-width: 480px) {
+    grid-template-columns: 15% 85%;
+    padding-left: 0.4rem;
+  }
   .button-container {
     display: flex;
     align-items: center;
@@ -119,6 +123,9 @@ const Container = styled.div`
       &:focus {
         outline: none;
       }
+      @media (max-width: 480px) {
+        font-size: 1rem;
+      }
     }
     button {
       /* width: 3rem; */
@@ -129,11 +136,23 @@ const Container = styled.div`
       justify-items: center;
       border: none;
       align-items: center;
-      cursor:pointer;
+      cursor: pointer;
       svg {
         font-size: 1.7rem;
         color: black;
+        @media (max-width: 480px) {
+          font-size: 1.3rem;
+        }
       }
+      @media (max-width: 480px) {
+        padding: 0.3rem 0.4rem;
+      }
+    }
+    @media (max-width: 480px) {
+      font-size: 1rem;
+
+      width: 110%;
+      gap: 0.1rem;
     }
   }
 `;

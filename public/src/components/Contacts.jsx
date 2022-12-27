@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Logo from "../assets/logo.png";
-export const Contacts = ({ contacts, currentUser, changeChat }) => {
+export const Contacts = ({ contacts, currentUser, changeChat, con }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
@@ -106,6 +106,11 @@ const Container = styled.div`
         border-radius: 1rem;
       }
     }
+    @media (max-width: 480px) {
+      width: 4.3rem;
+      flex-direction: column;
+      font-size: 0.7rem;
+    }
     .contact {
       background-color: #ffffff39;
       min-height: 3rem;
@@ -114,18 +119,28 @@ const Container = styled.div`
       border-radius: 0.2rem;
       padding: 0.4rem;
       display: flex;
+      flex-direction: row;
       align-items: center;
       gap: 1rem;
       transition: 0.5s ease-in-out;
+      @media (max-width: 480px) {
+        flex-direction: column;
+        padding: 0.2rem;
+        width: 80%;
+        gap: 0;
+      }
       .avatar {
         transition: 0.5s ease-in-out;
         img {
           height: 2.5rem;
+          /* @media (max-width: 480px) {
+            height: 2rem;
+          } */
         }
       }
       .circle {
         height: 3rem;
-        padding:2px;
+        padding: 2px;
         border-radius: 50%;
         border: 2px solid #821db5;
       }
@@ -136,8 +151,6 @@ const Container = styled.div`
       }
     }
     .selected {
-     
-
       background-color: #c580e7;
     }
   }
@@ -148,10 +161,16 @@ const Container = styled.div`
     justify-content: stretch;
     /* gap: 1rem; */
     .avatar {
-      padding:1rem;
+      padding: 1rem;
       img {
         height: 4rem;
         max-inline-size: 100%;
+      }
+      @media (max-width: 480px) {
+        /* flex-direction: column; */
+        padding: 0rem;
+        /* width: 20%; */
+        gap: 0;
       }
     }
 
@@ -159,6 +178,15 @@ const Container = styled.div`
       h2 {
         color: #821db5;
       }
+    }
+    @media (max-width: 480px) {
+      flex-direction: column;
+      padding: 0.7rem;
+      justify-content: center;
+      width: 50%;
+      
+      gap: 0;
+      font-size: 0.5rem;
     }
     @media screen and(min-width:720px) and (max-width: 1080px) {
       gap: 0.5rem;
@@ -169,4 +197,7 @@ const Container = styled.div`
       }
     }
   }
+  /* @media (max-width: 480px) {
+      grid-template-rows: 75% 0;
+    } */
 `;
