@@ -10,6 +10,7 @@ require("dotenv").config();
 
 mongoose.set("strictQuery", true);
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
