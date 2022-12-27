@@ -6,7 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const messagesRoute = require("./routes/messagesRoute");
 
 const app = express();
-const router = express.Router();
+// const router = express.Router();
 const socket = require("socket.io");
 require("dotenv").config();
 
@@ -14,11 +14,11 @@ mongoose.set("strictQuery", true);
 app.use(cors());
 app.options('*', cors());
 app.use(express.json());
-router.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// router.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
 
 app.use("/api/auth", userRoutes);
